@@ -1,5 +1,6 @@
 package edu.tudai.tp3_integrador.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Carrera {
     private Integer duracion;
 
     @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<EstudianteCarrera> estudiantes;
 
     public Carrera() {
