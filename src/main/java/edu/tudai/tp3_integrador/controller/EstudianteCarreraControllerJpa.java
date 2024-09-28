@@ -1,8 +1,8 @@
 package edu.tudai.tp3_integrador.controller;
 
-import edu.tudai.tp3_integrador.model.Carrera;
-import edu.tudai.tp3_integrador.model.Estudiante;
+import edu.tudai.tp3_integrador.dto.EstudianteCarreraDto;
 import edu.tudai.tp3_integrador.model.EstudianteCarrera;
+import edu.tudai.tp3_integrador.model.EstudianteCarreraPK;
 import edu.tudai.tp3_integrador.service.EstudianteCarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +18,40 @@ public class EstudianteCarreraControllerJpa {
     @Autowired
     private EstudianteCarreraService estudianteCarreraService;
 
-    // Obtener estudiantes de una carrera filtrados por ciudad
-    @GetMapping("/carrera/{nombre}/ciudad/{ciudad}")
-    public ResponseEntity<List<Estudiante>> obtenerEstudiantesPorCarreraYCiudad(@PathVariable String nombre, @PathVariable String ciudad) {
-        List<Estudiante> estudiantes = estudianteCarreraService.obtenerEstudiantesPorCarreraYCiudad(nombre, ciudad);
-        return ResponseEntity.ok(estudiantes);
+
+    @GetMapping
+    public List<EstudianteCarrera> getAllEstudianteCarrera() {
+        return estudianteCarreraService.getAllEstudianteCarrera();
     }
 
-    @GetMapping("/todos")
-    public ResponseEntity<List<EstudianteCarrera>> obtenerEstudiantesCarreras() {
-        List<EstudianteCarrera> ec = estudianteCarreraService.obtenerEstudiantesCarreras();
-        return ResponseEntity.ok(ec);
+    @GetMapping("/{estudianteId}/{carreraId}")
+    public ResponseEntity<EstudianteCarrera> getEstudianteCarreraById(@PathVariable Long estudianteId, @PathVariable Long carreraId) {
+        EstudianteCarreraPK pk = new EstudianteCarreraPK(estudianteId, carreraId);
+        Optional<EstudianteCarrera> estudianteCarrera = estudianteCarreraService.getEstudianteCarreraById(pk);
+        return estudianteCarrera.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public EstudianteCarrera createEstudianteCarrera(@RequestBody EstudianteCarrera estudianteCarrera) {
+        return estudianteCarreraService.saveEstudianteCarrera(estudianteCarrera);
+    }
+
+    @DeleteMapping("/{estudianteId}/{carreraId}")
+    public void deleteEstudianteCarrera(@PathVariable Long estudianteId, @PathVariable Long carreraId) {
+        EstudianteCarreraPK pk = new EstudianteCarreraPK(estudianteId, carreraId);
+        estudianteCarreraService.deleteEstudianteCarrera(pk);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<EstudianteCarrera>> obtenerCarreraPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<EstudianteCarrera>> obtenerCarreraPorId(@PathVariable EstudianteCarreraPK id) {
         Optional<EstudianteCarrera> ec = estudianteCarreraService.obtenerEstudianteCarreraPorId(id);
         return ResponseEntity.ok(ec);
+    }
+
+    // Generar reporte de carreras (inscriptos y egresados por año)
+    @GetMapping("/reporte-carreras")
+    public ResponseEntity<List<EstudianteCarreraDto>> generarReporteCarreras() {
+        List<EstudianteCarreraDto> reporte = estudianteCarreraService.generarReporteCarreras();
+        return ResponseEntity.ok(reporte);
     }
 }

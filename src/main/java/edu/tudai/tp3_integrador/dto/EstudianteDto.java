@@ -1,42 +1,19 @@
-package edu.tudai.tp3_integrador.model;
+package edu.tudai.tp3_integrador.dto;
 
-
-import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-public class Estudiante {
-    @Id
-    private long id;
-
-    @Column
+public class EstudianteDto {
     private String nombre;
-    @Column
     private String apellido;
-    @Column
     private int edad;
-    @Column
     private String genero;
-    @Column
     private int dni;
-    @Column
     private String ciudad;
-    @Column
     private long lu;
 
-
-    @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<EstudianteCarrera> carreras;
-
-    public Estudiante() {
+    public EstudianteDto() {
         super();
-        this.carreras = new ArrayList<EstudianteCarrera>();
     }
 
-    public Estudiante(int id, String nombre, String apellido, int edad, String genero, int dni, String ciudad, long lu) {
-        super();
-        this.id = id;
+    public EstudianteDto(String nombre, String apellido, int edad, String genero, int dni, String ciudad, long lu) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -46,19 +23,10 @@ public class Estudiante {
         this.lu = lu;
     }
 
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNombre() {
         return nombre;
     }
+
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -72,11 +40,11 @@ public class Estudiante {
         this.apellido = apellido;
     }
 
-    public Integer getEdad() {
+    public int getEdad() {
         return edad;
     }
 
-    public void setEdad(Integer edad) {
+    public void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -104,21 +72,12 @@ public class Estudiante {
         this.ciudad = ciudad;
     }
 
-    public Long getLu() {
+    public long getLu() {
         return lu;
     }
 
-    public void setLu(Long lu) {
+    public void setLu(long lu) {
         this.lu = lu;
-    }
-
-
-
-    public List<EstudianteCarrera> getCarreras() {
-        if (this.carreras == null) {
-            this.carreras = new ArrayList<>();
-        }
-        return this.carreras;
     }
 
 }

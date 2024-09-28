@@ -1,5 +1,6 @@
 package edu.tudai.tp3_integrador.controller;
 
+import edu.tudai.tp3_integrador.dto.CarreraDto;
 import edu.tudai.tp3_integrador.model.Carrera;
 import edu.tudai.tp3_integrador.service.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +17,32 @@ public class CarreraControllerJpa {
     @Autowired
     private CarreraService carreraService;
 
-    // Recuperar carreras con estudiantes inscritos
-    @GetMapping("/carreras-con-estudiantes")
-    public ResponseEntity<List<Object[]>> obtenerCarrerasConEstudiantes() {
-        List<Object[]> carreras = carreraService.obtenerCarrerasConEstudiantesInscritos();
-        return ResponseEntity.ok(carreras);
-    }
-
-    // Generar reporte de carreras (inscriptos y egresados por año)
-    @GetMapping("/reporte-carreras")
-    public ResponseEntity<List<Object[]>> generarReporteCarreras() {
-        List<Object[]> reporte = carreraService.generarReporteCarreras();
-        return ResponseEntity.ok(reporte);
-    }
-
-    @GetMapping("/todos")
-    public ResponseEntity<List<Carrera>> obtenerCarreras() {
-        List<Carrera> carreras = carreraService.obtenerCarreras();
-        return ResponseEntity.ok(carreras);
+    @GetMapping
+    public List<Carrera> getAllCarreras() {
+        return carreraService.getAllCarreras();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Carrera>> obtenerCarreraPorId(@PathVariable Long id) {
-        Optional<Carrera> carrera = carreraService.obtenerCarreraPorId(id);
-        return ResponseEntity.ok(carrera);
+    public ResponseEntity<Carrera> getCarreraById(@PathVariable Long id) {
+        Optional<Carrera> carrera = carreraService.getCarreraById(id);
+        return carrera.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public Carrera createCarrera(@RequestBody Carrera carrera) {
+        return carreraService.saveCarrera(carrera);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCarrera(@PathVariable Long id) {
+        carreraService.deleteCarrera(id);
+    }
+
+    // Recuperar carreras con estudiantes inscritos
+    @GetMapping("/carreras-con-estudiantes")
+    public ResponseEntity<List<CarreraDto>> obtenerCarrerasConEstudiantes() {
+        List<CarreraDto> carreras = carreraService.obtenerCarrerasConEstudiantesInscritos();
+        return ResponseEntity.ok(carreras);
     }
 }
 

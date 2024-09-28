@@ -1,14 +1,11 @@
 package edu.tudai.tp3_integrador.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Data
 public class Carrera {
 
     @Id
@@ -18,10 +15,8 @@ public class Carrera {
     @Column
     private String nombre;
     @Column
-    private Integer duracion;
 
-    @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<EstudianteCarrera> estudiantes;
 
     public Carrera() {
@@ -29,9 +24,8 @@ public class Carrera {
         this.estudiantes = new ArrayList<EstudianteCarrera>();
     }
 
-    public Carrera(String nombre, Integer duracion) {
+    public Carrera(String nombre) {
         this.nombre = nombre;
-        this.duracion = duracion;
     }
 
     // Getters y Setters
@@ -52,28 +46,8 @@ public class Carrera {
         this.nombre = nombre;
     }
 
-    public Integer getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(Integer duracion) {
-        this.duracion = duracion;
-    }
-
     public List<EstudianteCarrera> getEstudiantes() {
-        if (this.estudiantes == null) {
-            this.estudiantes = new ArrayList<>();
-        }
         return this.estudiantes;
     }
 
-
-    @Override
-    public String toString() {
-        return "Carrera{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", duracion=" + duracion + " años" +
-                '}' + "\n";
-    }
 }
