@@ -1,5 +1,6 @@
 package edu.tudai.tp3_integrador.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Carrera {
     @Column
 
     @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<EstudianteCarrera> estudiantes;
 
     public Carrera() {
