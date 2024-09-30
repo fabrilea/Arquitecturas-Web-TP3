@@ -4,6 +4,7 @@ import edu.tudai.tp3_integrador.dto.EstudianteDto;
 import edu.tudai.tp3_integrador.model.Estudiante;
 import edu.tudai.tp3_integrador.model.EstudianteCarrera;
 import edu.tudai.tp3_integrador.service.EstudianteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,12 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/estudiantes")
 public class EstudianteControllerJpa {
 
-    @Autowired
-    private EstudianteService estudianteService;
+    private final EstudianteService estudianteService;
 
     @GetMapping
     public List<Estudiante> getAllEstudiantes() {

@@ -3,6 +3,7 @@ package edu.tudai.tp3_integrador.controller;
 import edu.tudai.tp3_integrador.dto.CarreraDto;
 import edu.tudai.tp3_integrador.model.Carrera;
 import edu.tudai.tp3_integrador.service.CarreraService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/carreras")
 public class CarreraControllerJpa {
 
-    @Autowired
-    private CarreraService carreraService;
+    private final CarreraService carreraService;
 
     @GetMapping
     public List<Carrera> getAllCarreras() {

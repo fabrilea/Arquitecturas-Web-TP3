@@ -17,5 +17,5 @@ public interface CarreraRepository extends JpaRepository<Carrera, Long> {
             "WHERE e.id IS NOT NULL " +
             "GROUP BY c.nombre " +
             "ORDER BY COUNT(e.id) DESC")
-    List<CarreraDto> obtenerCarrerasConEstudiantesInscritos();
+    List<CarreraDto> obtenerCarrerasConEstudiantesInscriptos();
 }

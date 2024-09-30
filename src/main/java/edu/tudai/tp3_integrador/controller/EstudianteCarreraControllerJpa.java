@@ -4,19 +4,19 @@ import edu.tudai.tp3_integrador.dto.EstudianteCarreraDto;
 import edu.tudai.tp3_integrador.model.EstudianteCarrera;
 import edu.tudai.tp3_integrador.model.EstudianteCarreraPK;
 import edu.tudai.tp3_integrador.service.EstudianteCarreraService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/estudiante-carrera")
 public class EstudianteCarreraControllerJpa {
 
-    @Autowired
-    private EstudianteCarreraService estudianteCarreraService;
+    private final EstudianteCarreraService estudianteCarreraService;
 
 
     @GetMapping
@@ -40,12 +40,6 @@ public class EstudianteCarreraControllerJpa {
     public void deleteEstudianteCarrera(@PathVariable Long estudianteId, @PathVariable Long carreraId) {
         EstudianteCarreraPK pk = new EstudianteCarreraPK(estudianteId, carreraId);
         estudianteCarreraService.deleteEstudianteCarrera(pk);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<EstudianteCarrera>> obtenerCarreraPorId(@PathVariable EstudianteCarreraPK id) {
-        Optional<EstudianteCarrera> ec = estudianteCarreraService.obtenerEstudianteCarreraPorId(id);
-        return ResponseEntity.ok(ec);
     }
 
     // Generar reporte de carreras (inscriptos y egresados por año)
