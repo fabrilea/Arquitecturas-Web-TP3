@@ -28,8 +28,7 @@ public class Estudiante {
     private long lu;
 
 
-    @OneToMany(mappedBy = "estudiantes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "estudiantes")
+    @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<EstudianteCarrera> carreras;
 
     public Estudiante() {

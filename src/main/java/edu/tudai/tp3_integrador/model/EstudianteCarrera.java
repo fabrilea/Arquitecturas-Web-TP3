@@ -1,5 +1,6 @@
 package edu.tudai.tp3_integrador.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import edu.tudai.tp3_integrador.model.Carrera;
 import edu.tudai.tp3_integrador.model.Estudiante;
 import edu.tudai.tp3_integrador.model.EstudianteCarreraPK;
@@ -20,10 +21,12 @@ public class EstudianteCarrera {
 
     @ManyToOne
     @MapsId("id_estudiante")
+    @JsonIgnoreProperties("carreras")
     private Estudiante estudiante;
 
     @ManyToOne
     @MapsId("id_carrera")
+    @JsonIgnoreProperties("estudiantes")
     private Carrera carrera;
 
 

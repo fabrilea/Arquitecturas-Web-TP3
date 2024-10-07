@@ -18,8 +18,7 @@ public class Carrera {
     private String nombre;
     @Column
 
-    @OneToMany(mappedBy = "carreras", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties(value = "carreras")
+    @OneToMany(mappedBy = "carrera", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<EstudianteCarrera> estudiantes;
 
     public Carrera() {

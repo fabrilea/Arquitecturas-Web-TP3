@@ -42,7 +42,7 @@ public class CarreraControllerJpa {
     // Recuperar carreras con estudiantes inscritos
     @GetMapping("/carreras-con-estudiantes")
     public ResponseEntity<List<CarreraDto>> obtenerCarrerasConEstudiantes() {
-        List<CarreraDto> carreras = carreraService.obtenerCarrerasConEstudiantesInscritos();
+        List<CarreraDto> carreras = carreraService.obtenerCarrerasConEstudiantesInscriptos();
         return ResponseEntity.ok(carreras);
     }
 }

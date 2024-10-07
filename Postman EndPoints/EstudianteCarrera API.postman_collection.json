@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "2b3cf371-56a5-4bf1-b05b-0c5217c5dc8d",
+		"name": "EstudianteCarrera API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24298768"
+	},
+	"item": [
+		{
+			"name": "Get all EstudianteCarrera",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/estudiante-carrera",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estudiante-carrera"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get EstudianteCarrera by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/estudiante-carrera/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estudiante-carrera",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create EstudianteCarrera",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"estudianteId\": 1, \"carreraId\": 1, \"anioIngreso\": 2020}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/estudiante-carrera",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estudiante-carrera"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete EstudianteCarrera",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/estudiante-carrera/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estudiante-carrera",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar reporte de carreras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/estudiante-carrera/reporte-carreras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"estudiante-carrera",
+						"reporte-carreras"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
