@@ -19,7 +19,7 @@ public interface EstudianteCarreraRepository extends JpaRepository<EstudianteCar
             "JOIN ec.carrera c " +
             "JOIN ec.estudiante e " +
             "GROUP BY c.nombre, YEAR(ec.fechaInscripcion) " +
-            "ORDER BY YEAR(ec.fechaInscripcion) ASC")
+            "ORDER BY YEAR(ec.fechaInscripcion) ASC, c.nombre")
     List<EstudianteCarreraDto> generarReporteCarreras();
 }
 
